@@ -62,9 +62,8 @@ macro_rules! gpio_as_var {
 			};
 
 			$(
-				#[derive(Clone, Copy)]
 				pub struct $PXi<T> {
-					mode: T
+					_mode: T
 				}
 			)+
 							
@@ -79,7 +78,7 @@ macro_rules! gpio_as_var {
 					unsafe { (*RCC::ptr()).apb2enr.modify(|_, w|w.$iopxen().set_bit()); }
 					$Portx { 
 						$(
-							$pxi: $PXi { mode: Reset },
+							$pxi: $PXi { _mode: Reset },
 						)+
 					}
 				}	
@@ -93,7 +92,7 @@ macro_rules! gpio_as_var {
 						
 						unsafe{ (*$GPIOx::ptr()).$crx.modify(|r, w| w.bits((r.bits() & !(0b1111 << OFFSET)) | (bits << OFFSET))); }
 
-						$PXi { mode: Output }
+						$PXi { _mode: Output }
 					}
 			
 					pub fn open_drain(self, speed: GpioSpeed) -> $PXi<Output>{
@@ -102,7 +101,7 @@ macro_rules! gpio_as_var {
 						
 						unsafe{ (*$GPIOx::ptr()).$crx.modify(|r, w| w.bits((r.bits() & !(0b1111 << OFFSET)) | (bits << OFFSET))); }
 
-						$PXi { mode: Output }
+						$PXi { _mode: Output }
 					}
 			
 					pub fn alternate_push_pull(self, speed: GpioSpeed) -> $PXi<Alternate>{
@@ -111,7 +110,7 @@ macro_rules! gpio_as_var {
 						
 						unsafe{ (*$GPIOx::ptr()).$crx.modify(|r, w| w.bits((r.bits() & !(0b1111 << OFFSET)) | (bits << OFFSET))); }
 
-						$PXi { mode: Alternate }
+						$PXi { _mode: Alternate }
 					}
 			
 					pub fn alternate_open_drain(self, speed: GpioSpeed) -> $PXi<Alternate>{
@@ -120,7 +119,7 @@ macro_rules! gpio_as_var {
 						
 						unsafe{ (*$GPIOx::ptr()).$crx.modify(|r, w| w.bits((r.bits() & !(0b1111 << OFFSET)) | (bits << OFFSET))); }
 
-						$PXi { mode: Alternate }
+						$PXi { _mode: Alternate }
 					}
 			
 					pub fn pull_up(self) -> $PXi<Input>{
@@ -132,7 +131,7 @@ macro_rules! gpio_as_var {
 							(*$GPIOx::ptr()).$crx.modify(|r, w| w.bits((r.bits() & !(0b1111 << OFFSET)) | (BITS << OFFSET))); 
 						}
 
-						$PXi { mode: Input }
+						$PXi { _mode: Input }
 					}
 			
 					pub fn pull_down(self) -> $PXi<Input>{
@@ -144,7 +143,7 @@ macro_rules! gpio_as_var {
 							(*$GPIOx::ptr()).$crx.modify(|r, w| w.bits((r.bits() & !(0b1111 << OFFSET)) | (BITS << OFFSET))); 
 						}
 
-						$PXi { mode: Input }
+						$PXi { _mode: Input }
 					}
 			
 					pub fn floating(self) -> $PXi<Input>{
@@ -153,7 +152,7 @@ macro_rules! gpio_as_var {
 
                         unsafe{ (*$GPIOx::ptr()).$crx.modify(|r, w| w.bits((r.bits() & !(0b1111 << OFFSET)) | (BITS << OFFSET))); }
 
-						$PXi { mode: Input }
+						$PXi { _mode: Input }
 					}
 			
 					pub fn analog(self) -> $PXi<Analog>{
@@ -162,7 +161,7 @@ macro_rules! gpio_as_var {
 
                         unsafe{ (*$GPIOx::ptr()).$crx.modify(|r, w| w.bits((r.bits() & !(0b1111 << OFFSET)) | (BITS << OFFSET))); }
 
-						$PXi { mode: Analog }
+						$PXi { _mode: Analog }
 					}
 				}
 				
@@ -186,7 +185,7 @@ macro_rules! gpio_as_var {
 					}
 			
 					fn reset(self) -> $PXi<Reset> {
-						$PXi { mode: Reset }
+						$PXi { _mode: Reset }
 					}
 				}
 
@@ -219,7 +218,7 @@ macro_rules! gpio_as_var {
 					}
 				
 					fn reset(self) -> $PXi<Reset> {
-						$PXi { mode: Reset }
+						$PXi { _mode: Reset }
 					}
 
 				}
@@ -272,7 +271,6 @@ macro_rules! gpio_as_var {
 						}
 					}
 				}
-			
 			)+
 		}
 	}
