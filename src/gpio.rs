@@ -291,7 +291,6 @@ macro_rules! gpio_as_fn {
 			}
 
 			$(
-				#[derive(Clone, Copy)]
 				pub struct $PXi;
 				impl $PXi {
 					
