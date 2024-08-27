@@ -36,6 +36,7 @@ version = "0.5.0"
 version = "0.15.1"
 
 [features]
+rt = ["stm32f1/rt"]
 stm32f100 = [
     "stm32f1/stm32f100"
 ]

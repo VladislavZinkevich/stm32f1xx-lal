@@ -7,7 +7,7 @@ fn SysTick() {
 }
 
 static mut G_TIME: u32 = 0;
-static mut G_AHB_CLK: u32 = 0;
+static mut G_AHB_CLK: u32 = 8;
 
 pub struct SysTime{}
 impl SysTime {
