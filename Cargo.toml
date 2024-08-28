@@ -1,6 +1,6 @@
 [package]
 name = "stm32f1xx-lal"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
 description = "LAL for the STM32F1xx family"
 readme = "README.md"
