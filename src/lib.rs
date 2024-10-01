@@ -18,3 +18,4 @@ pub use stm32f1::stm32f107 as pac;
 pub mod systime;
 pub mod prelude;
 pub mod gpio;
+pub mod rcc;
