@@ -279,7 +279,7 @@ macro_rules! gpio_as_var {
 macro_rules! gpio_as_fn {
 	($PORTx:ident, $GPIOx:ident, $iopxen:ident, $extiport:expr, $(($PXi:ident, $pin:expr, $exticrx:ident, $crx:ident),)+) => {
 		#[allow(non_snake_case)]
-		pub(crate) mod $PORTx{
+		pub mod $PORTx{
 			use super::pac::{$GPIOx, EXTI, AFIO, RCC};
 			use super::{
 				GpioSpeed,
